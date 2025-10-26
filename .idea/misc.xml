@@ -3,5 +3,32 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11 (SimpleFlask)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (SimpleFlask)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12" project-jdk-type="Python SDK" />
+  <component name="RMarkdownSettings">
+    <option name="renderProfiles">
+      <map>
+        <entry key="file://$PROJECT_DIR$/codes/1-problematyka-brakow-danych.qmd">
+          <value>
+            <RMarkdownRenderProfile>
+              <option name="outputDirectoryUrl" value="file://$PROJECT_DIR$/codes" />
+            </RMarkdownRenderProfile>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/codes/2-wizualizacja-brakow.qmd">
+          <value>
+            <RMarkdownRenderProfile>
+              <option name="outputDirectoryUrl" value="file://$PROJECT_DIR$/codes" />
+            </RMarkdownRenderProfile>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/data/zad2.rmd">
+          <value>
+            <RMarkdownRenderProfile>
+              <option name="outputDirectoryUrl" value="file://$PROJECT_DIR$/data" />
+            </RMarkdownRenderProfile>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
 </project>

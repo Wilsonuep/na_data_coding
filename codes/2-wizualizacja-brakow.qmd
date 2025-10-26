@@ -46,7 +46,7 @@ Wczytujemy zbiór danych `data2-cross_sectional.csv`
 ## R
 
 ```{r}
-df_cross <- read.csv("../data/data2-cross_sectional.csv")
+df_cross <- read.csv("../adn-2026/data/data2-cross_sectional.csv")
 head(df_cross)
 ```
 
@@ -122,12 +122,12 @@ Wczytujemy dane w dwóch formatach: `data/data2-panel_long.csv`, `data/data2-pan
 ## R
 
 ```{r}
-df_long <- read.csv("../data/data2-panel_long.csv")
+df_long <- read.csv("../adn-2026/data/data2-panel_long.csv")
 head(df_long)
 ```
 
 ```{r}
-df_wide <- read.csv("../data/data2-panel_wide.csv")
+df_wide <- read.csv("../adn-2026/data/data2-panel_wide.csv")
 head(df_wide)
 ```
 

@@ -22,7 +22,7 @@ summary(x1)
 ```
 
 ```{r}
-table(x1)
+table(x1, exclude = FALSE)
 ```
 
 ```{r}
@@ -37,12 +37,16 @@ mean(x1)
 mean(x1, na.rm = T)
 ```
 
+Sposób na czyszczenie danych i zapisywanie informacji o nich jako metadanych. Przechowywane są jako atrybuty zbioru.
+
 ```{r}
-na.omit(x1)
+x1_clean <- na.omit(x1)
+attr(x1_clean, "na.action")
 ```
 
 ```{r}
 x2 <- c(1,2,3, NA, NaN)
+x2
 ```
 
 ```{r}
@@ -110,9 +114,11 @@ x1.dropna()
 ## R
 
 ```{r}
-dane <- read.csv("../data/plik-przyklad.csv")
+dane <- read.csv("../adn-2026/data/plik-przyklad.csv", na.strings = c("NA", "-9", "", "N/D", "NULL", "-", "Brak danych"))
 head(dane)
 ```
+
+Kolumny są również opisywane za pomocą typu danych jaki został rozpoznany
 
 ```{r}
 tail(dane)
@@ -123,10 +129,11 @@ Plik zawiera różne sposoby kodowania braków danych? Jakie? Jak to ustawić (h
 Co z korelacją? Jak wyznaczyć korelację między np. wiekiem, wzrostem i oceną gdy występują braki danych?
 
 ```{r, eval = FALSE}
-with(dane, cor(wzrost, ocena))
+print(with(dane, cor(wzrost, ocena, use="complete.obs")))
+print(with(dane, cor(wzrost, ocena, use="pairwise.complete.obs")))
 ```
 
-## Python
+ ## Python
 
 ```{python, python-read-data}
 dane = pd.read_csv(
