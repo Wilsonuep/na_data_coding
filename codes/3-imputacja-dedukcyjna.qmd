@@ -114,11 +114,13 @@ mieszkanie <- data.frame(
 Wykorzystanie [ollama](https://ollama.com), modelu małego modelu `qwen3:8b` oraz pakietu [`ellmer`](https://ellmer.tidyverse.org) i strukturyzowanej odpowiedzi.
 
 ```{r, eval=FALSE}
-chat <- chat_ollama(model = "qwen3:4b")
+chat <- chat_ollama(model = "qwen3:4b",
+                    params = params(temperature = 0),
+                    seed = 2025)
 
 type_apartment <- type_object(
   floor_area = type_number(),
-  type = type_string(),
+  is_studio = type_boolean(),
   number_of_rooms = type_number()
 )
 
@@ -130,15 +132,37 @@ wynik <- chat$chat_structured(
 Wynik
 
 ```{r, eval = F}
-> wynik
 $floor_area
 [1] 32.1
 
-$type
-[1] "apartment"
+$is_studio
+[1] TRUE
 
 $number_of_rooms
-[1] 1.00634e+15
+[1] 1
+```
+
+Dla tego przykładu
+
+```{r, eval = FALSE}
+ wynik <- chat$chat_structured(
+     "Luksusowy apartament 85m2, 4 pokoje",
+     type = type_apartment
+)
+```
+
+Dostajemy
+
+```{r, eval = FALSE}
+> wynik
+$floor_area
+[1] 85
+
+$is_studio
+[1] FALSE
+
+$number_of_rooms
+[1] 4
 ```
 
 ## Python
@@ -311,6 +335,30 @@ dat
 
 ```{r}
 impute_lr(dat,v)
+```
+
+```{r}
+v1 <- validate::validator(
+      x1 + x2 == x3,
+      x4 + x5 == x1,
+      x6 + x7 == x2,
+      x8 + x9 == x3)
+
+impute_lr(data.frame(x1=80, x5=50, x8=10, x9=20,
+                     x2=NA, x3=NA, x4=NA, x6=NA, x7=NA),
+          v1)
+
+v2 <- validate::validator(
+      x1 + x2 == x3,
+      x4 + x5 + x6 == x2,
+      x7 + x8 == x1,
+      x9 + x10 == x3,
+      x4 + x7 == x9)
+
+impute_lr(data.frame(x2=90, x4=30, x5=40, x7=45, x10=10 ,
+                     x1=NA, x3=NA, x6=NA, x8=NA, x9=NA),
+          v2)
+
 ```
 
 ## Python
