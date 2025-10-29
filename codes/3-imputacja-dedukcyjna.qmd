@@ -145,7 +145,7 @@ $number_of_rooms
 Dla tego przykładu
 
 ```{r, eval = FALSE}
- wynik <- chat$chat_structured(
+wynik <- chat$chat_structured(
      "Luksusowy apartament 85m2, 4 pokoje",
      type = type_apartment
 )
@@ -163,6 +163,29 @@ $is_studio
 
 $number_of_rooms
 [1] 4
+```
+
+ale dla tego
+
+```{r, eval = F}
+wynik <- chat$chat_structured(
+     "Kompaktowe mieszkanie 30m2 w świetnej lokalizacji",
+     type = type_apartment
+)
+```
+
+zwraca informacje o tym, że jest to kawalerka (nie wiemy tego) oraz liczbie pokoi (tez nie ma tej informacji)
+
+```{r, eval = F}
+> wynik
+$floor_area
+[1] 30
+
+$is_studio 
+[1] TRUE
+
+$number_of_rooms
+[1] 1
 ```
 
 ## Python
