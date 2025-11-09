@@ -82,8 +82,8 @@ populacja <- data.frame(
 )
 y_true <- colMeans(populacja[, c("y1", "y2", "y3")]) 
 
-## sumulacja (1000 razy)
-R <- 5000
+## sumulacja (2000 razy)
+R <- 2000
 results <- matrix(0, R, 9)
 colnames(results) <- paste0(rep(c("naive", "nn", "nn_new"), each = 3), 
                             rep(c("_y1", "_y2", "_y3"), times=2))
@@ -101,9 +101,9 @@ for (r in 1:R) {
   res_y3 <- impute_knn(proba, y3  ~ x1 + x2 + x3 + x3 + x4 + x5 + x6, k=1)
   
   res_y1_y2_new <- impute_knn(proba, y1 + y2  ~ x1 + x2, 
-                              k=floor(n^(2/(2+2)))) ## k=31 optmalne
+                              k=floor(sum(proba$delta)^(2/(2+2)))) ## k=31 optmalne
   res_y3_new <- impute_knn(proba, y3  ~ x1 + x2 + x3 + x3 + x4 + x5 + x6, 
-                           k=floor(n^(2/(2+6)))) ## k=5 - optymalne
+                           k=floor(sum(proba$delta)^(2/(2+6)))) ## k=5 - optymalne
  
   proba$y1 <- res_y1_y2$y1
   proba$y2 <- res_y1_y2$y2
@@ -130,6 +130,12 @@ Relatywne obciązenie estymatora
 ```{r}
 round((colMeans(results) - rep(y_true, times = 3)) / colMeans(results)*100,2)
 ```
+Wariancja
+
+```{r}
+round(apply(results, 2, var)*100,4)
+```
+
 RMSE
 
 ```{r}
@@ -296,47 +302,7 @@ glm(I(is.na(czyta_ksiazki_z_brakami)) ~ plec + wiek + wyksztalcenie,
   summary()
 ```
 
-```{r}
-glm(czyta_ksiazki_z_brakami ~ plec + wiek + wyksztalcenie,
-    data = data,
-    subset = !is.na(czyta_ksiazki_z_brakami)) |> 
-  summary()
-```
 
-```{r}
-dd1 <- data |> 
-  impute_knn(czyta_ksiazki_z_brakami ~ plec + wiek + wyksztalcenie, k = 5, backend = "simputation")
-
-dd2 <- data |> 
-  impute_knn(czyta_ksiazki_z_brakami ~ plec + wiek + wyksztalcenie, k = 5, backend = "VIM")
-
-
-dd1$czyta_ksiazki |> table() |> prop.table() ## true
-dd1$czyta_ksiazki_z_brakami |> table() |> prop.table()
-dd2$czyta_ksiazki_z_brakami |> table() |> prop.table()
-
-```
-
-Zmiana wykształcenia na ordinal
-
-```{r}
-data$wyksztalcenie_f <- as.ordered(data$wyksztalcenie)
-levels(data$wyksztalcenie_f)
-```
-
-```{r}
-dd1 <- data |> 
-  impute_knn(czyta_ksiazki_z_brakami ~ plec + wiek + wyksztalcenie_f, k = 5, backend = "simputation")
-
-dd2 <- data |> 
-  impute_knn(czyta_ksiazki_z_brakami ~ plec + wiek + wyksztalcenie_f, k = 5, backend = "VIM")
-
-
-dd1$czyta_ksiazki |> table() |> prop.table() ## true
-dd1$czyta_ksiazki_z_brakami |> table() |> prop.table()
-dd2$czyta_ksiazki_z_brakami |> table() |> prop.table()
-
-```
 
 ## Python
 
