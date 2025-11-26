@@ -15,8 +15,8 @@ editor: source
 ## R
 
 ```{r}
-library(simputation) # Load the 'simputation' package for imputation methods
-library(FNN) # Load the 'FNN' package for fast nearest neighbor search
+library(simputation)
+library(FNN) 
 ```
 
 ## Python
@@ -98,13 +98,14 @@ mask = ~przyklad1['Y'].isna()
 X = przyklad1.loc[mask, 'X'].values.reshape(-1, 1)
 y = przyklad1.loc[mask, 'Y'].values
 
+## Zwykła regresja liniowa
 model = LinearRegression()
 model.fit(X, y)
 
-# Wartości przewidywane dla wszystkich obserwacji
+## Wartości przewidywane
 przyklad1['pred'] = model.predict(przyklad1['X'].values.reshape(-1, 1))
 
-# Wyszukiwanie najbliższego sąsiada
+# Sąsiadzi
 # Dane obserwowane
 observed_pred = przyklad1.loc[mask, 'pred'].values.reshape(-1, 1)
 # Dane brakujące
