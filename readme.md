@@ -57,7 +57,7 @@
   + R: `simputation`, `FNN`
   + Python: `sklearn.linear_model`, `sklearn.neighbors`
   + Zbiór danych na ćwiczenia [data4-czytelnictwo.csv](data/data4-czytelnictwo.csv)
-  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2025/refs/heads/main/codes/5-imputacja-pmm.html)
+  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/5-imputacja-pmm.html)
 
 + Imputacja wielokrotna
   + R: [`mice`](https://github.com/amices/mice), [`rMIDAS`](https://cran.r-project.org/web/packages/rMIDAS/index.html)
