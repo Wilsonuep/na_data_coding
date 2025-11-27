@@ -84,6 +84,7 @@ przyklad1_wynik[is.na(przyklad1$Y), "Y"] <- apply(sasiedzi$nn.index, 1, FUN=func
 przyklad1_wynik
 ```
 
+
 ## Python
 
 ```{python}
@@ -119,6 +120,49 @@ distances, indices = nbrs.kneighbors(missing_pred)
 przyklad1.loc[~mask, 'Y'] = przyklad1.loc[mask, 'Y'].values[indices.flatten()]
 
 przyklad1
+```
+
+:::
+
+# Krótkie ćwiczenie
+
+::: panel-tabset
+## R
+
+Prosze wykonać imputację danych dla następującego zbioru danych
+
+```{r}
+set.seed(42)
+n <- 10
+
+df <- data.frame(
+  id = 1:10,
+  plec = c("K", "M", "M", "K", "M", "K", "M", "K", "M", "K"),
+  rok_studiow = c(1, 2, 3, 1, 2, 3, 1, 2, 3, 1),
+  pracuje = c("Tak", "Nie", "Tak", "Nie", "Tak", "Nie", "Tak", "Tak", "Nie", "Tak"),
+  piwa = c(2, 5, 8, NA, 6, NA, 9, 4, 7, NA)
+)
+
+df
+```
+
+
+## Python
+
+Prosze wykonać imputację danych dla następującego zbioru danych
+
+```{python}
+np.random.seed(42)
+n = 10
+
+df = pd.DataFrame({
+    'id': range(1, 11),
+    'plec': ["K", "M", "M", "K", "M", "K", "M", "K", "M", "K"],
+    'rok_studiow': [1, 2, 3, 1, 2, 3, 1, 2, 3, 1],
+    'pracuje': ["Tak", "Nie", "Tak", "Nie", "Tak", "Nie", "Tak", "Tak", "Nie", "Tak"],
+    'piwa': [2, 5, 8, np.nan, 6, np.nan, 9, 4, 7, np.nan]
+})
+
 ```
 
 :::

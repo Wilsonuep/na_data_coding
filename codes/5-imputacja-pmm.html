@@ -3228,8 +3228,9 @@ window.Quarto = {
   <ul>
   <li><a href="#wczytanie-potrzebych-pakietów" id="toc-wczytanie-potrzebych-pakietów" class="nav-link active" data-scroll-target="#wczytanie-potrzebych-pakietów"><span class="header-section-number">1</span> Wczytanie potrzebych pakietów</a></li>
   <li><a href="#przykład-1-z-zajęć" id="toc-przykład-1-z-zajęć" class="nav-link" data-scroll-target="#przykład-1-z-zajęć"><span class="header-section-number">2</span> Przykład 1 z zajęć</a></li>
-  <li><a href="#przykład-2-czytelnictwo" id="toc-przykład-2-czytelnictwo" class="nav-link" data-scroll-target="#przykład-2-czytelnictwo"><span class="header-section-number">3</span> Przykład 2 – czytelnictwo</a></li>
-  <li><a href="#symulacja" id="toc-symulacja" class="nav-link" data-scroll-target="#symulacja"><span class="header-section-number">4</span> Symulacja</a></li>
+  <li><a href="#krótkie-ćwiczenie" id="toc-krótkie-ćwiczenie" class="nav-link" data-scroll-target="#krótkie-ćwiczenie"><span class="header-section-number">3</span> Krótkie ćwiczenie</a></li>
+  <li><a href="#przykład-2-czytelnictwo" id="toc-przykład-2-czytelnictwo" class="nav-link" data-scroll-target="#przykład-2-czytelnictwo"><span class="header-section-number">4</span> Przykład 2 – czytelnictwo</a></li>
+  <li><a href="#symulacja" id="toc-symulacja" class="nav-link" data-scroll-target="#symulacja"><span class="header-section-number">5</span> Symulacja</a></li>
   </ul>
 </nav>
 </div>
@@ -3768,17 +3769,70 @@ display: block;
 </div>
 </div>
 </section>
-<section id="przykład-2-czytelnictwo" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Przykład 2 – czytelnictwo</h1>
+<section id="krótkie-ćwiczenie" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Krótkie ćwiczenie</h1>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href>R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href>Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Prosze wykonać imputację danych dla następującego zbioru danych</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## reading</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;../data/data4-czytelnictwo.csv&quot;</span>, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;logical&quot;</span>, <span class="st">&quot;logical&quot;</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">plec =</span> <span class="fu">c</span>(<span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">rok_studiow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pracuje =</span> <span class="fu">c</span>(<span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">piwa =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="cn">NA</span>, <span class="dv">6</span>, <span class="cn">NA</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="cn">NA</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id plec rok_studiow pracuje piwa
+1   1    K           1     Tak    2
+2   2    M           2     Nie    5
+3   3    M           3     Tak    8
+4   4    K           1     Nie   NA
+5   5    M           2     Tak    6
+6   6    K           3     Nie   NA
+7   7    M           1     Tak    9
+8   8    K           2     Tak    4
+9   9    M           3     Nie    7
+10 10    K           1     Tak   NA</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>Prosze wykonać imputację danych dla następującego zbioru danych</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;id&#39;</span>: <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;plec&#39;</span>: [<span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;K&quot;</span>],</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;rok_studiow&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>],</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;pracuje&#39;</span>: [<span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Tak&quot;</span>, <span class="st">&quot;Nie&quot;</span>, <span class="st">&quot;Tak&quot;</span>],</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;piwa&#39;</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">8</span>, np.nan, <span class="dv">6</span>, np.nan, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">7</span>, np.nan]</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="przykład-2-czytelnictwo" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Przykład 2 – czytelnictwo</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## reading</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;../data/data4-czytelnictwo.csv&quot;</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;logical&quot;</span>, <span class="st">&quot;logical&quot;</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  plec wiek wyksztalcenie czyta_ksiazki czyta_ksiazki_z_brakami
 1    M   52          brak         FALSE                      NA
@@ -3790,7 +3844,7 @@ display: block;
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> plec         wiek          wyksztalcenie czyta_ksiazki  
  K:505   Min.   :18.00   brak      : 15   Mode :logical  
@@ -3810,8 +3864,8 @@ display: block;
 </div>
 <p>Dodajemy kopię kolumny <code>czyta_ksiazki_z_brakami</code> aby porównać imputację PMM i NNI.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>czyta_ksiazki_z_brakami_nni <span class="ot">&lt;-</span> data<span class="sc">$</span>czyta_ksiazki_z_brakami</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>czyta_ksiazki_z_brakami_pmm <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>czyta_ksiazki_z_brakami) <span class="do">## musimy zamienić na braki numeryczny (patrz poniżej)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>czyta_ksiazki_z_brakami_nni <span class="ot">&lt;-</span> data<span class="sc">$</span>czyta_ksiazki_z_brakami</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>czyta_ksiazki_z_brakami_pmm <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>czyta_ksiazki_z_brakami) <span class="do">## musimy zamienić na braki numeryczny (patrz poniżej)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -3829,34 +3883,34 @@ display: block;
 <li>nie można ustawić różnej liczby <code>k</code> (domyślnie 1)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">impute_pmm</span>(<span class="at">formula =</span> czyta_ksiazki_z_brakami_pmm <span class="sc">~</span> plec <span class="sc">+</span> wiek <span class="sc">+</span> wyksztalcenie)  <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">impute_knn</span>(czyta_ksiazki_z_brakami_nni <span class="sc">~</span> plec <span class="sc">+</span> wiek <span class="sc">+</span> wyksztalcenie, <span class="at">k =</span> <span class="dv">1</span>) <span class="ot">-&gt;</span> imputacja_wynik</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">impute_pmm</span>(<span class="at">formula =</span> czyta_ksiazki_z_brakami_pmm <span class="sc">~</span> plec <span class="sc">+</span> wiek <span class="sc">+</span> wyksztalcenie)  <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">impute_knn</span>(czyta_ksiazki_z_brakami_nni <span class="sc">~</span> plec <span class="sc">+</span> wiek <span class="sc">+</span> wyksztalcenie, <span class="at">k =</span> <span class="dv">1</span>) <span class="ot">-&gt;</span> imputacja_wynik</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(<span class="at">True=</span>czyta_ksiazki, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">NNI=</span>czyta_ksiazki_z_brakami_nni,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">PMM =</span> czyta_ksiazki_z_brakami_pmm) <span class="sc">~</span> <span class="dv">1</span>, imputacja_wynik, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(<span class="at">True=</span>czyta_ksiazki, </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">NNI=</span>czyta_ksiazki_z_brakami_nni,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">PMM =</span> czyta_ksiazki_z_brakami_pmm) <span class="sc">~</span> <span class="dv">1</span>, imputacja_wynik, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  True   NNI   PMM
 1 0.72 0.696 0.695</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&quot;../data/data4-czytelnictwo.csv&quot;</span>, </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                   dtype<span class="op">=</span>{<span class="st">&#39;plec&#39;</span>: <span class="st">&#39;category&#39;</span>, </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;wiek&#39;</span>: <span class="st">&#39;float64&#39;</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;wyksztalcenie&#39;</span>: <span class="st">&#39;category&#39;</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;czyta_ksiazki&#39;</span>: <span class="st">&#39;float64&#39;</span>,  <span class="co"># zmiana z bool</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;czyta_ksiazki_z_brakami&#39;</span>: <span class="st">&#39;float64&#39;</span>})  <span class="co"># zmiana z bool</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Head:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">&quot;../data/data4-czytelnictwo.csv&quot;</span>, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                   dtype<span class="op">=</span>{<span class="st">&#39;plec&#39;</span>: <span class="st">&#39;category&#39;</span>, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;wiek&#39;</span>: <span class="st">&#39;float64&#39;</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;wyksztalcenie&#39;</span>: <span class="st">&#39;category&#39;</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;czyta_ksiazki&#39;</span>: <span class="st">&#39;float64&#39;</span>,  <span class="co"># zmiana z bool</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;czyta_ksiazki_z_brakami&#39;</span>: <span class="st">&#39;float64&#39;</span>})  <span class="co"># zmiana z bool</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Head:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Head:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  plec  wiek wyksztalcenie  czyta_ksiazki  czyta_ksiazki_z_brakami
 0    M  52.0          brak            0.0                      NaN
@@ -3865,12 +3919,12 @@ display: block;
 3    M  40.0        wyższe            1.0                      1.0
 4    K  74.0        wyższe            1.0                      1.0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Summary:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Summary:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Summary:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.describe(include<span class="op">=</span><span class="st">&#39;all&#39;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.describe(include<span class="op">=</span><span class="st">&#39;all&#39;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        plec         wiek wyksztalcenie  czyta_ksiazki  czyta_ksiazki_z_brakami
 count   1000  1000.000000          1000    1000.000000               781.000000
@@ -3887,104 +3941,104 @@ max      NaN    80.000000           NaN       1.000000                 1.000000<
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;czyta_ksiazki_z_brakami&#39;</span>]</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;czyta_ksiazki_z_brakami&#39;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;czyta_ksiazki_z_brakami&#39;</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;czyta_ksiazki_z_brakami&#39;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gower_distance(X):</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>   n_samples, n_features <span class="op">=</span> X.shape</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>   gower_mat <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> col <span class="kw">in</span> X.columns:</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">if</span> X[col].dtype.name <span class="op">==</span> <span class="st">&#39;category&#39;</span>:</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Nominalne zmienne</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>           feature_mat <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>           <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>               <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>                   feature_mat[i,j] <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> X[col].iloc[i] <span class="op">!=</span> X[col].iloc[j] <span class="cf">else</span> <span class="dv">0</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>       <span class="cf">else</span>:</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Zmienne ciągłe</span></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>           range_col <span class="op">=</span> X[col].<span class="bu">max</span>() <span class="op">-</span> X[col].<span class="bu">min</span>()</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>           <span class="cf">if</span> range_col <span class="op">!=</span> <span class="dv">0</span>:</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>               feature_mat <span class="op">=</span> squareform(pdist(X[col].values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), metric<span class="op">=</span><span class="st">&#39;cityblock&#39;</span>)) <span class="op">/</span> range_col</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>           <span class="cf">else</span>:</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>               feature_mat <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>       </span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>       gower_mat <span class="op">+=</span> feature_mat</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> gower_mat <span class="op">/</span> n_features</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pmm_imputation(X, y):</span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Maska dla obserwowanych wartości</span></span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>   mask <span class="op">=</span> <span class="op">~</span>y.isna()</span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Przygotowanie danych do modelu</span></span>
-<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>   X_encoded <span class="op">=</span> X.copy()</span>
-<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> col <span class="kw">in</span> X_encoded.select_dtypes(include<span class="op">=</span>[<span class="st">&#39;category&#39;</span>]):</span>
-<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>       X_encoded[col] <span class="op">=</span> LabelEncoder().fit_transform(X_encoded[col])</span>
-<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Dopasowanie modelu regresji logistycznej</span></span>
-<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>   model <span class="op">=</span> LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>   model.fit(X_encoded[mask], y[mask])</span>
-<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Przewidywane wartości</span></span>
-<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>   pred_all <span class="op">=</span> model.predict_proba(X_encoded)[:, <span class="dv">1</span>]</span>
-<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Dla każdej brakującej wartości znajdź najbliższą obserwowaną</span></span>
-<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>   y_imputed <span class="op">=</span> y.copy()</span>
-<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> idx <span class="kw">in</span> y[<span class="op">~</span>mask].index:</span>
-<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Oblicz różnice w przewidywanych wartościach</span></span>
-<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>       diff <span class="op">=</span> np.<span class="bu">abs</span>(pred_all[idx] <span class="op">-</span> pred_all[mask])</span>
-<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Znajdź najbliższego sąsiada</span></span>
-<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>       closest <span class="op">=</span> np.argmin(diff)</span>
-<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Przypisz wartość od najbliższego sąsiada</span></span>
-<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>       y_imputed[idx] <span class="op">=</span> y[mask].iloc[closest]</span>
-<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> y_imputed</span>
-<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nn_imputation(X, y, k<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Oblicz macierz odległości Gowera</span></span>
-<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>   gower_mat <span class="op">=</span> gower_distance(X)</span>
-<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Maska dla obserwowanych wartości</span></span>
-<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>   mask <span class="op">=</span> <span class="op">~</span>y.isna()</span>
-<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Imputacja</span></span>
-<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>   y_imputed <span class="op">=</span> y.copy()</span>
-<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> idx <span class="kw">in</span> y[<span class="op">~</span>mask].index:</span>
-<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Weź odległości do wszystkich obserwowanych wartości</span></span>
-<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>       distances <span class="op">=</span> gower_mat[idx, mask]</span>
-<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Znajdź k najbliższych sąsiadów</span></span>
-<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>       closest <span class="op">=</span> np.argpartition(distances, k)[:k]</span>
-<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Wybierz losowo jednego z k najbliższych sąsiadów</span></span>
-<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>       chosen <span class="op">=</span> np.random.choice(closest)</span>
-<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Przypisz wartość od wybranego sąsiada</span></span>
-<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a>       y_imputed[idx] <span class="op">=</span> y[mask].iloc[chosen]</span>
-<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> y_imputed</span>
-<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gower_distance(X):</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>   n_samples, n_features <span class="op">=</span> X.shape</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>   gower_mat <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> col <span class="kw">in</span> X.columns:</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">if</span> X[col].dtype.name <span class="op">==</span> <span class="st">&#39;category&#39;</span>:</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Nominalne zmienne</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>           feature_mat <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>           <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>               <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>                   feature_mat[i,j] <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> X[col].iloc[i] <span class="op">!=</span> X[col].iloc[j] <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>       <span class="cf">else</span>:</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Zmienne ciągłe</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>           range_col <span class="op">=</span> X[col].<span class="bu">max</span>() <span class="op">-</span> X[col].<span class="bu">min</span>()</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>           <span class="cf">if</span> range_col <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>               feature_mat <span class="op">=</span> squareform(pdist(X[col].values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), metric<span class="op">=</span><span class="st">&#39;cityblock&#39;</span>)) <span class="op">/</span> range_col</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>           <span class="cf">else</span>:</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>               feature_mat <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>       gower_mat <span class="op">+=</span> feature_mat</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> gower_mat <span class="op">/</span> n_features</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pmm_imputation(X, y):</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Maska dla obserwowanych wartości</span></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>   mask <span class="op">=</span> <span class="op">~</span>y.isna()</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Przygotowanie danych do modelu</span></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>   X_encoded <span class="op">=</span> X.copy()</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> col <span class="kw">in</span> X_encoded.select_dtypes(include<span class="op">=</span>[<span class="st">&#39;category&#39;</span>]):</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>       X_encoded[col] <span class="op">=</span> LabelEncoder().fit_transform(X_encoded[col])</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Dopasowanie modelu regresji logistycznej</span></span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>   model <span class="op">=</span> LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>   model.fit(X_encoded[mask], y[mask])</span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Przewidywane wartości</span></span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>   pred_all <span class="op">=</span> model.predict_proba(X_encoded)[:, <span class="dv">1</span>]</span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Dla każdej brakującej wartości znajdź najbliższą obserwowaną</span></span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>   y_imputed <span class="op">=</span> y.copy()</span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> idx <span class="kw">in</span> y[<span class="op">~</span>mask].index:</span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Oblicz różnice w przewidywanych wartościach</span></span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a>       diff <span class="op">=</span> np.<span class="bu">abs</span>(pred_all[idx] <span class="op">-</span> pred_all[mask])</span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Znajdź najbliższego sąsiada</span></span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a>       closest <span class="op">=</span> np.argmin(diff)</span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Przypisz wartość od najbliższego sąsiada</span></span>
+<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a>       y_imputed[idx] <span class="op">=</span> y[mask].iloc[closest]</span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> y_imputed</span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nn_imputation(X, y, k<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb37-54"><a href="#cb37-54" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Oblicz macierz odległości Gowera</span></span>
+<span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a>   gower_mat <span class="op">=</span> gower_distance(X)</span>
+<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Maska dla obserwowanych wartości</span></span>
+<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a>   mask <span class="op">=</span> <span class="op">~</span>y.isna()</span>
+<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Imputacja</span></span>
+<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a>   y_imputed <span class="op">=</span> y.copy()</span>
+<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> idx <span class="kw">in</span> y[<span class="op">~</span>mask].index:</span>
+<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Weź odległości do wszystkich obserwowanych wartości</span></span>
+<span id="cb37-65"><a href="#cb37-65" aria-hidden="true" tabindex="-1"></a>       distances <span class="op">=</span> gower_mat[idx, mask]</span>
+<span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Znajdź k najbliższych sąsiadów</span></span>
+<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a>       closest <span class="op">=</span> np.argpartition(distances, k)[:k]</span>
+<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Wybierz losowo jednego z k najbliższych sąsiadów</span></span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>       chosen <span class="op">=</span> np.random.choice(closest)</span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Przypisz wartość od wybranego sąsiada</span></span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a>       y_imputed[idx] <span class="op">=</span> y[mask].iloc[chosen]</span>
+<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> y_imputed</span>
+<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wykonanie imputacji</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">&#39;plec&#39;</span>, <span class="st">&#39;wiek&#39;</span>, <span class="st">&#39;wyksztalcenie&#39;</span>]]</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>] <span class="op">=</span> pmm_imputation(X, data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>])</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>] <span class="op">=</span> nn_imputation(X, data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>], k<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Obliczenie średnich</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;True&#39;</span>: [data[<span class="st">&#39;czyta_ksiazki&#39;</span>].mean()],</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;NNI&#39;</span>: [data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>].mean()],</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;PMM&#39;</span>: [data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>].mean()]</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Średnie wartości:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wykonanie imputacji</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">&#39;plec&#39;</span>, <span class="st">&#39;wiek&#39;</span>, <span class="st">&#39;wyksztalcenie&#39;</span>]]</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>] <span class="op">=</span> pmm_imputation(X, data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>])</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>] <span class="op">=</span> nn_imputation(X, data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>], k<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Obliczenie średnich</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;True&#39;</span>: [data[<span class="st">&#39;czyta_ksiazki&#39;</span>].mean()],</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;NNI&#39;</span>: [data[<span class="st">&#39;czyta_ksiazki_z_brakami_nni&#39;</span>].mean()],</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;PMM&#39;</span>: [data[<span class="st">&#39;czyta_ksiazki_z_brakami_pmm&#39;</span>].mean()]</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Średnie wartości:&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Średnie wartości:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   True    NNI    PMM
 0  0.72  0.696  0.692</code></pre>
@@ -3994,99 +4048,99 @@ max      NaN    80.000000           NaN       1.000000                 1.000000<
 </div>
 </div>
 </section>
-<section id="symulacja" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Symulacja</h1>
+<section id="symulacja" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Symulacja</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ustawienie ziarna losowości dla reprodukowalności</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parametry symulacji</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">50000</span>  <span class="co"># rozmiar populacji</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">400</span>    <span class="co"># rozmiar próby</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generowanie zmiennych objaśniających</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>x4 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>x5 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>x6 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Generowanie zmiennej y dla trzech modeli</span></span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> e</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.167</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> (x1<span class="fl">-0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (x2<span class="fl">-0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> e</span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.5</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6 <span class="sc">+</span> e</span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Tworzenie wskaźnika odpowiedzi (mechanizm braków danych)</span></span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>logit_p <span class="ot">&lt;-</span> <span class="fl">0.2</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2</span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">exp</span>(logit_p)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(logit_p))</span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Tworzenie ramki danych</span></span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>populacja <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a> <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>N,</span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a> <span class="at">x1 =</span> x1,</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a> <span class="at">x2 =</span> x2,</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a> <span class="at">x3 =</span> x3,</span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a> <span class="at">x4 =</span> x4,</span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a> <span class="at">x5 =</span> x5,</span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a> <span class="at">x6 =</span> x6,</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a> <span class="at">y1 =</span> y1,</span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a> <span class="at">y2 =</span> y2,</span>
-<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a> <span class="at">y3 =</span> y3,</span>
-<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a> <span class="at">p =</span> p</span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>y_true <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(populacja[, <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>, <span class="st">&quot;y2&quot;</span>, <span class="st">&quot;y3&quot;</span>)]) </span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a><span class="do">## sumulacja (2000 razy)</span></span>
-<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, R, <span class="dv">9</span>)</span>
-<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;naive&quot;</span>, <span class="st">&quot;nn&quot;</span>, <span class="st">&quot;pmm&quot;</span>), <span class="at">each =</span> <span class="dv">3</span>), </span>
-<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;_y1&quot;</span>, <span class="st">&quot;_y2&quot;</span>, <span class="st">&quot;_y3&quot;</span>), <span class="at">times=</span><span class="dv">3</span>))</span>
-<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>R) {</span>
-<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(r)</span>
-<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a>  proba <span class="ot">&lt;-</span> populacja[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, n), ]</span>
-<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>delta <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(proba), <span class="dv">1</span>, proba<span class="sc">$</span>p)</span>
-<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y1[proba<span class="sc">$</span>delta <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y2[proba<span class="sc">$</span>delta <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y3[proba<span class="sc">$</span>delta <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a>  results[r, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(proba[, <span class="fu">c</span>(<span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>, <span class="st">&quot;y2&quot;</span>, <span class="st">&quot;y3&quot;</span>))], <span class="at">na.rm=</span>T)</span>
-<span id="cb39-58"><a href="#cb39-58" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-59"><a href="#cb39-59" aria-hidden="true" tabindex="-1"></a>  results_nn <span class="ot">&lt;-</span> proba <span class="sc">|&gt;</span></span>
-<span id="cb39-60"><a href="#cb39-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_knn</span>(y1 <span class="sc">+</span> y2  <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">k=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb39-61"><a href="#cb39-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_knn</span>(y3 <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6, <span class="at">k=</span><span class="dv">5</span>)</span>
-<span id="cb39-62"><a href="#cb39-62" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb39-63"><a href="#cb39-63" aria-hidden="true" tabindex="-1"></a>  results_pmm <span class="ot">&lt;-</span> proba <span class="sc">|&gt;</span></span>
-<span id="cb39-64"><a href="#cb39-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_pmm</span>(y1 <span class="sc">+</span> y2  <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">predictor =</span> impute_lm) <span class="sc">|&gt;</span></span>
-<span id="cb39-65"><a href="#cb39-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_pmm</span>(y3 <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6, <span class="at">predictor =</span> impute_lm)</span>
-<span id="cb39-66"><a href="#cb39-66" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-67"><a href="#cb39-67" aria-hidden="true" tabindex="-1"></a>  <span class="do">## by hand for y3</span></span>
-<span id="cb39-68"><a href="#cb39-68" aria-hidden="true" tabindex="-1"></a>  model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y3 <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6, <span class="at">data=</span>proba)</span>
-<span id="cb39-69"><a href="#cb39-69" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>pred_y3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, proba)</span>
-<span id="cb39-70"><a href="#cb39-70" aria-hidden="true" tabindex="-1"></a>  nn_results <span class="ot">&lt;-</span> <span class="fu">get.knnx</span>(<span class="at">data =</span> proba[<span class="sc">!</span><span class="fu">is.na</span>(proba<span class="sc">$</span>y3), <span class="st">&quot;pred_y3&quot;</span>], </span>
-<span id="cb39-71"><a href="#cb39-71" aria-hidden="true" tabindex="-1"></a>                         <span class="at">query =</span> proba[<span class="fu">is.na</span>(proba<span class="sc">$</span>y3), <span class="st">&quot;pred_y3&quot;</span>],</span>
-<span id="cb39-72"><a href="#cb39-72" aria-hidden="true" tabindex="-1"></a>                         <span class="at">k =</span> <span class="dv">1</span>)</span>
-<span id="cb39-73"><a href="#cb39-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-74"><a href="#cb39-74" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-75"><a href="#cb39-75" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y1_nn <span class="ot">&lt;-</span> results_nn<span class="sc">$</span>y1</span>
-<span id="cb39-76"><a href="#cb39-76" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y2_nn <span class="ot">&lt;-</span> results_nn<span class="sc">$</span>y2</span>
-<span id="cb39-77"><a href="#cb39-77" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y3_nn <span class="ot">&lt;-</span> results_nn<span class="sc">$</span>y3</span>
-<span id="cb39-78"><a href="#cb39-78" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-79"><a href="#cb39-79" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y1_pmm <span class="ot">&lt;-</span> results_pmm<span class="sc">$</span>y1</span>
-<span id="cb39-80"><a href="#cb39-80" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y2_pmm <span class="ot">&lt;-</span> results_pmm<span class="sc">$</span>y2</span>
-<span id="cb39-81"><a href="#cb39-81" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y3_pmm <span class="ot">&lt;-</span> results_pmm<span class="sc">$</span>y3</span>
-<span id="cb39-82"><a href="#cb39-82" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-83"><a href="#cb39-83" aria-hidden="true" tabindex="-1"></a>  results[r, <span class="dv">4</span><span class="sc">:</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(proba[, <span class="fu">c</span>(<span class="st">&quot;y1_nn&quot;</span>, <span class="st">&quot;y2_nn&quot;</span>, <span class="st">&quot;y3_nn&quot;</span>, <span class="st">&quot;y1_pmm&quot;</span>, <span class="st">&quot;y2_pmm&quot;</span>, <span class="st">&quot;y3_pmm&quot;</span>)])</span>
-<span id="cb39-84"><a href="#cb39-84" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb39-85"><a href="#cb39-85" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-86"><a href="#cb39-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-87"><a href="#cb39-87" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(results <span class="sc">-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(y_true, <span class="at">times =</span> <span class="dv">3</span>), <span class="at">byrow=</span>T, <span class="at">ncol =</span> <span class="dv">9</span>, <span class="at">nrow=</span>R), </span>
-<span id="cb39-88"><a href="#cb39-88" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Estymator&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Obciążenie&quot;</span>,</span>
-<span id="cb39-89"><a href="#cb39-89" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Wpływ liczby zmiennych w imputacji NN na obciązenie&quot;</span>) </span>
-<span id="cb39-90"><a href="#cb39-90" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">0</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ustawienie ziarna losowości dla reprodukowalności</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parametry symulacji</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">50000</span>  <span class="co"># rozmiar populacji</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">400</span>    <span class="co"># rozmiar próby</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generowanie zmiennych objaśniających</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>x4 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>x5 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>x6 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Generowanie zmiennej y dla trzech modeli</span></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> e</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.167</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> (x1<span class="fl">-0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (x2<span class="fl">-0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> e</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.5</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6 <span class="sc">+</span> e</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Tworzenie wskaźnika odpowiedzi (mechanizm braków danych)</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>logit_p <span class="ot">&lt;-</span> <span class="fl">0.2</span> <span class="sc">+</span> x1 <span class="sc">+</span> x2</span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">exp</span>(logit_p)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(logit_p))</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Tworzenie ramki danych</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>populacja <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a> <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>N,</span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a> <span class="at">x1 =</span> x1,</span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a> <span class="at">x2 =</span> x2,</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a> <span class="at">x3 =</span> x3,</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a> <span class="at">x4 =</span> x4,</span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a> <span class="at">x5 =</span> x5,</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a> <span class="at">x6 =</span> x6,</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a> <span class="at">y1 =</span> y1,</span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a> <span class="at">y2 =</span> y2,</span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a> <span class="at">y3 =</span> y3,</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a> <span class="at">p =</span> p</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>y_true <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(populacja[, <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>, <span class="st">&quot;y2&quot;</span>, <span class="st">&quot;y3&quot;</span>)]) </span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a><span class="do">## sumulacja (2000 razy)</span></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, R, <span class="dv">9</span>)</span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;naive&quot;</span>, <span class="st">&quot;nn&quot;</span>, <span class="st">&quot;pmm&quot;</span>), <span class="at">each =</span> <span class="dv">3</span>), </span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;_y1&quot;</span>, <span class="st">&quot;_y2&quot;</span>, <span class="st">&quot;_y3&quot;</span>), <span class="at">times=</span><span class="dv">3</span>))</span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>R) {</span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(r)</span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a>  proba <span class="ot">&lt;-</span> populacja[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, n), ]</span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>delta <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fu">nrow</span>(proba), <span class="dv">1</span>, proba<span class="sc">$</span>p)</span>
+<span id="cb42-53"><a href="#cb42-53" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y1[proba<span class="sc">$</span>delta <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb42-54"><a href="#cb42-54" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y2[proba<span class="sc">$</span>delta <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb42-55"><a href="#cb42-55" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y3[proba<span class="sc">$</span>delta <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb42-56"><a href="#cb42-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-57"><a href="#cb42-57" aria-hidden="true" tabindex="-1"></a>  results[r, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(proba[, <span class="fu">c</span>(<span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>, <span class="st">&quot;y2&quot;</span>, <span class="st">&quot;y3&quot;</span>))], <span class="at">na.rm=</span>T)</span>
+<span id="cb42-58"><a href="#cb42-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-59"><a href="#cb42-59" aria-hidden="true" tabindex="-1"></a>  results_nn <span class="ot">&lt;-</span> proba <span class="sc">|&gt;</span></span>
+<span id="cb42-60"><a href="#cb42-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_knn</span>(y1 <span class="sc">+</span> y2  <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">k=</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb42-61"><a href="#cb42-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_knn</span>(y3 <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6, <span class="at">k=</span><span class="dv">5</span>)</span>
+<span id="cb42-62"><a href="#cb42-62" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb42-63"><a href="#cb42-63" aria-hidden="true" tabindex="-1"></a>  results_pmm <span class="ot">&lt;-</span> proba <span class="sc">|&gt;</span></span>
+<span id="cb42-64"><a href="#cb42-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_pmm</span>(y1 <span class="sc">+</span> y2  <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">predictor =</span> impute_lm) <span class="sc">|&gt;</span></span>
+<span id="cb42-65"><a href="#cb42-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">impute_pmm</span>(y3 <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6, <span class="at">predictor =</span> impute_lm)</span>
+<span id="cb42-66"><a href="#cb42-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-67"><a href="#cb42-67" aria-hidden="true" tabindex="-1"></a>  <span class="do">## by hand for y3</span></span>
+<span id="cb42-68"><a href="#cb42-68" aria-hidden="true" tabindex="-1"></a>  model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y3 <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> x4 <span class="sc">+</span> x5 <span class="sc">+</span> x6, <span class="at">data=</span>proba)</span>
+<span id="cb42-69"><a href="#cb42-69" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>pred_y3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, proba)</span>
+<span id="cb42-70"><a href="#cb42-70" aria-hidden="true" tabindex="-1"></a>  nn_results <span class="ot">&lt;-</span> <span class="fu">get.knnx</span>(<span class="at">data =</span> proba[<span class="sc">!</span><span class="fu">is.na</span>(proba<span class="sc">$</span>y3), <span class="st">&quot;pred_y3&quot;</span>], </span>
+<span id="cb42-71"><a href="#cb42-71" aria-hidden="true" tabindex="-1"></a>                         <span class="at">query =</span> proba[<span class="fu">is.na</span>(proba<span class="sc">$</span>y3), <span class="st">&quot;pred_y3&quot;</span>],</span>
+<span id="cb42-72"><a href="#cb42-72" aria-hidden="true" tabindex="-1"></a>                         <span class="at">k =</span> <span class="dv">1</span>)</span>
+<span id="cb42-73"><a href="#cb42-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-74"><a href="#cb42-74" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-75"><a href="#cb42-75" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y1_nn <span class="ot">&lt;-</span> results_nn<span class="sc">$</span>y1</span>
+<span id="cb42-76"><a href="#cb42-76" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y2_nn <span class="ot">&lt;-</span> results_nn<span class="sc">$</span>y2</span>
+<span id="cb42-77"><a href="#cb42-77" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y3_nn <span class="ot">&lt;-</span> results_nn<span class="sc">$</span>y3</span>
+<span id="cb42-78"><a href="#cb42-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-79"><a href="#cb42-79" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y1_pmm <span class="ot">&lt;-</span> results_pmm<span class="sc">$</span>y1</span>
+<span id="cb42-80"><a href="#cb42-80" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y2_pmm <span class="ot">&lt;-</span> results_pmm<span class="sc">$</span>y2</span>
+<span id="cb42-81"><a href="#cb42-81" aria-hidden="true" tabindex="-1"></a>  proba<span class="sc">$</span>y3_pmm <span class="ot">&lt;-</span> results_pmm<span class="sc">$</span>y3</span>
+<span id="cb42-82"><a href="#cb42-82" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-83"><a href="#cb42-83" aria-hidden="true" tabindex="-1"></a>  results[r, <span class="dv">4</span><span class="sc">:</span><span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(proba[, <span class="fu">c</span>(<span class="st">&quot;y1_nn&quot;</span>, <span class="st">&quot;y2_nn&quot;</span>, <span class="st">&quot;y3_nn&quot;</span>, <span class="st">&quot;y1_pmm&quot;</span>, <span class="st">&quot;y2_pmm&quot;</span>, <span class="st">&quot;y3_pmm&quot;</span>)])</span>
+<span id="cb42-84"><a href="#cb42-84" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb42-85"><a href="#cb42-85" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-86"><a href="#cb42-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-87"><a href="#cb42-87" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(results <span class="sc">-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(y_true, <span class="at">times =</span> <span class="dv">3</span>), <span class="at">byrow=</span>T, <span class="at">ncol =</span> <span class="dv">9</span>, <span class="at">nrow=</span>R), </span>
+<span id="cb42-88"><a href="#cb42-88" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Estymator&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Obciążenie&quot;</span>,</span>
+<span id="cb42-89"><a href="#cb42-89" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Wpływ liczby zmiennych w imputacji NN na obciązenie&quot;</span>) </span>
+<span id="cb42-90"><a href="#cb42-90" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">0</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4097,7 +4151,7 @@ max      NaN    80.000000           NaN       1.000000                 1.000000<
 </div>
 <p>Obciążenie</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">colMeans</span>(results) <span class="sc">-</span> <span class="fu">rep</span>(y_true, <span class="at">times =</span> <span class="dv">3</span>))<span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">colMeans</span>(results) <span class="sc">-</span> <span class="fu">rep</span>(y_true, <span class="at">times =</span> <span class="dv">3</span>))<span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   naive_y1    naive_y2    naive_y3       nn_y1       nn_y2       nn_y3 
  3.99644235  3.91330146  3.75578029  0.17340440  0.07854668  0.52248974 
