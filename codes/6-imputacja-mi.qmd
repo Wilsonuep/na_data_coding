@@ -42,6 +42,7 @@ import random
 Przykładowe dane 
 
 ```{r}
+set.seed(2025)
 n_rows <- 20
 df_example <- data.frame(
   A = seq(1:n_rows)*2, 
@@ -58,7 +59,7 @@ df_example_miss
 Imputacja z wykorzystaniem metody wielokrotnej imputacji
 
 ```{r}
-df_example_imp <- mice(df_example_miss, m=1)
+df_example_imp <- mice(df_example_miss, m=1, seed = 2025)
 ```
 
 Informacja dotycząca metody i zależności w danych
@@ -100,7 +101,8 @@ pred_mat
 df_example_imp <- mice(data = df_example_miss, 
                        m=4, 
                        method = "rf", 
-                       predictorMatrix = pred_mat)
+                       predictorMatrix = pred_mat, 
+                       seed = 2025)
 ```
 
 
