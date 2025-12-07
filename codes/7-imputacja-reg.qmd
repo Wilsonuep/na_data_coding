@@ -1,0 +1,166 @@
+---
+title: "6. Imputacja regresyjna"
+format: 
+  html:
+    self-contained: true
+    number-sections: true
+    toc: true
+    toc-title: "Spis treści"
+editor: source
+---
+
+# Wczytanie potrzebych pakietów
+
+::: panel-tabset
+## R
+
+```{r, message = FALSE, warning=FALSE}
+library(simputation)
+library(naniar)
+library(ggplot2)
+library(patchwork)
+library(data.table)
+```
+
+## Python
+
+```{python}
+import pandas as pd
+import numpy as np
+import random
+```
+
+
+:::
+
+# Przykład 1 z zajęć -- wizualizacja
+
+::: panel-tabset
+## R
+
+```{r}
+set.seed(2025)
+n <- 1000
+x <- rnorm(n,5,2)
+y <- 2 + 2*x + rnorm(n)
+pr <- plogis(5-1*x)
+R <- rbinom(n, 1, pr)
+y_miss <- ifelse(R == 1,y,NA)
+sim_data <- data.frame(x,y,R,y1=y_miss,y2=y_miss,y3=y_miss)
+head(sim_data)
+```
+
+```{r}
+set.seed(2025)
+sim_data <- sim_data |> 
+  bind_shadow() |>
+  impute_lm(y1 ~ x, add_residual = "none") |>
+  impute_lm(y2 ~ x, add_residual = "observed") |>
+  impute_lm(y3 ~ x, add_residual = "normal") |>
+  add_label_shadow()
+```
+
+```{r}
+ggplot(sim_data,
+       aes(x = x,
+           y = y1,
+           color = any_missing)) + 
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom") +
+  labs(y="y", title = "Deterministic") -> p1
+
+ggplot(sim_data,
+       aes(x = x,
+           y = y2,
+           color = any_missing)) + 
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom")  +
+  labs(y="y", title = "Stochastic (observed)")-> p2
+
+ggplot(sim_data,
+       aes(x = x,
+           y = y3,
+           color = any_missing)) + 
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom") +
+  labs(y="y", title = "Stochastic (normal)") -> p3
+
+p1 + p2 + p3 +
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom") -> plot_slides
+
+ggsave(filename = "fig-regimp.png", width = 10, height = 5, plot= plot_slides)
+plot_slides
+
+```
+
+## Python
+
+
+:::
+
+
+:::
+
+# Przykład 2 z zajęć -- symulacja
+
+::: panel-tabset
+## R
+
+```{r}
+set.seed(2025)
+n <- 5000
+x <- rnorm(n,5,2)
+y <- 2 + 2*x + rnorm(n)
+pr <- plogis(5-1*x)
+n_sims <- 5000
+results <- list()
+
+for (i in 1:n_sims) {
+  set.seed(2025+i)
+  R <- rbinom(n, 1, pr)
+  y_miss <- ifelse(R == 1,y,NA)
+  sim_data <- data.frame(x,y,R,y1=y_miss,y2=y_miss,y3=y_miss)
+  
+  sim_data_imp <- sim_data |> 
+    impute_lm(y1 ~ x, add_residual = "none") |>
+    impute_lm(y2 ~ x, add_residual = "observed") |>
+    impute_lm(y3 ~ x, add_residual = "normal") 
+  
+  
+  
+  results[[i]] <- c(colMeans(sim_data_imp)[c("y1", "y2", "y3")], 
+                    cor(sim_data_imp[, c("x", "y1", "y2", "y3")])[1,-1])
+    
+}
+
+results_df <- do.call("rbind",results) |> as.data.frame()
+names(results_df)[4:6] <- paste0("cor_",names(results_df)[4:6])
+boxplot(results_df[, c("y1","y2", "y3")])
+
+```
+
+RMSE
+
+```{r}
+mc_bias <- colMeans(results_df[, c("y1","y2", "y3")]) - mean(y)
+mc_var <- apply(results_df[, c("y1","y2", "y3")], 2, var)
+mc_rmse <- sqrt(mc_bias^2 + mc_var^2)
+mc_rmse
+```
+
+Correlation
+
+```{r}
+colMeans(results_df[, c("cor_y1","cor_y2","cor_y3")])
+```
+
+## Python
+
+
+:::
+
+
