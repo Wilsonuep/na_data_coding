@@ -65,6 +65,7 @@
   + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/6-imputacja-mi.html)
 
 + Imputacja regresyjna
+  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/7-imputacja-reg.html)
 
 ### 5. Kalibracja
 

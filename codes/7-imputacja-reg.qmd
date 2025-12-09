@@ -39,17 +39,21 @@ from scipy.special import expit
 ::: panel-tabset
 ## R
 
+Generujemy dane
+
 ```{r}
 set.seed(2025)
 n <- 1000
-x <- rnorm(n,5,2)
+x <- rnorm(n)
 y <- 2 + 2*x + rnorm(n)
-pr <- plogis(5-1*x)
+pr <- plogis(1-1*x)
 R <- rbinom(n, 1, pr)
 y_miss <- ifelse(R == 1,y,NA)
 sim_data <- data.frame(x,y,R,y1=y_miss,y2=y_miss,y3=y_miss)
 head(sim_data)
 ```
+
+Imputujemy na 3 sposoby, funkcje `bind_shadow()` i `add_label_shadow()` pochodzą z pakietu `naniar`.
 
 ```{r}
 set.seed(2025)
@@ -61,6 +65,7 @@ sim_data <- sim_data |>
   add_label_shadow()
 ```
 
+Wizualizacja braków danych
 ```{r}
 ggplot(sim_data,
        aes(x = x,
@@ -99,9 +104,6 @@ plot_slides
 ```
 
 ## Python
-
-
-:::
 
 ```{python}
 np.random.seed(2025)
@@ -186,62 +188,31 @@ plt.show()
 
 :::
 
-# Przykład 2 z zajęć -- symulacja
+
+# Przykład z zajęć
+
+1. Proszę wczytać zbiór danych `gospodarstwa-zajecia.xlsx`.
+
+2. Proszę zaimputować brakujące dane w zmiennych `los`, `dochg` i `wydg`, 
+   korzystając z:
+   + imputacji regresyjnej deterministycznej,
+   + imputacji regresyjnej stochastycznej,
+   + predictive mean matching (PMM).
+   
+   Można użyć dowolnego modelu i dowolnego zestawu zmiennych objaśniających.
+
+3. Dla każdej ze zmiennych (`los`, `dochg`, `wydg`) i każdej metody imputacji 
+   proszę oszacować i zaraportować średnią.
+
+4. Proszę porównać wyniki między metodami i krótko skomentować różnice.
+
+
+
 
 ::: panel-tabset
 ## R
 
-```{r}
-set.seed(2025)
-n <- 5000
-x <- rnorm(n,5,2)
-y <- 2 + 2*x + rnorm(n)
-pr <- plogis(5-1*x)
-n_sims <- 5000
-results <- list()
-
-for (i in 1:n_sims) {
-  set.seed(2025+i)
-  R <- rbinom(n, 1, pr)
-  y_miss <- ifelse(R == 1,y,NA)
-  sim_data <- data.frame(x,y,R,y1=y_miss,y2=y_miss,y3=y_miss)
-  
-  sim_data_imp <- sim_data |> 
-    impute_lm(y1 ~ x, add_residual = "none") |>
-    impute_lm(y2 ~ x, add_residual = "observed") |>
-    impute_lm(y3 ~ x, add_residual = "normal") 
-  
-  
-  
-  results[[i]] <- c(colMeans(sim_data_imp)[c("y1", "y2", "y3")], 
-                    cor(sim_data_imp[, c("x", "y1", "y2", "y3")])[1,-1])
-    
-}
-
-results_df <- do.call("rbind",results) |> as.data.frame()
-names(results_df)[4:6] <- paste0("cor_",names(results_df)[4:6])
-boxplot(results_df[, c("y1","y2", "y3")])
-
-```
-
-RMSE
-
-```{r}
-mc_bias <- colMeans(results_df[, c("y1","y2", "y3")]) - mean(y)
-mc_var <- apply(results_df[, c("y1","y2", "y3")], 2, var)
-mc_rmse <- sqrt(mc_bias^2 + mc_var^2)
-mc_rmse
-```
-
-Correlation
-
-```{r}
-colMeans(results_df[, c("cor_y1","cor_y2","cor_y3")])
-```
-
 ## Python
 
-
 :::
-
 
