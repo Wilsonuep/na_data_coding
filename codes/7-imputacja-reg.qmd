@@ -189,30 +189,3 @@ plt.show()
 :::
 
 
-# Przykład z zajęć
-
-1. Proszę wczytać zbiór danych `gospodarstwa-zajecia.xlsx`.
-
-2. Proszę zaimputować brakujące dane w zmiennych `los`, `dochg` i `wydg`, 
-   korzystając z:
-   + imputacji regresyjnej deterministycznej,
-   + imputacji regresyjnej stochastycznej,
-   + predictive mean matching (PMM).
-   
-   Można użyć dowolnego modelu i dowolnego zestawu zmiennych objaśniających.
-
-3. Dla każdej ze zmiennych (`los`, `dochg`, `wydg`) i każdej metody imputacji 
-   proszę oszacować i zaraportować średnią.
-
-4. Proszę porównać wyniki między metodami i krótko skomentować różnice.
-
-
-
-
-::: panel-tabset
-## R
-
-## Python
-
-:::
-

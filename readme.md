@@ -67,7 +67,12 @@
 + Imputacja regresyjna
   + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/7-imputacja-reg.html)
 
-### 5. Kalibracja
+### 5. Case study
+
++ [opis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/8-case-study.html)
++ [zbior](./data/gospodarstwa-zajecia.xlsx)
+ 
+### 6. Kalibracja
 
 + Wstęp do kalibracji
   + R: `survey`, `sampling`, `laeken`
@@ -82,7 +87,7 @@
   + Dane na zajęcia [gospodarstwa-zajecia.xlsx](data/gospodarstwa-zajecia.xlsx)
   
 
-### 6. Ważenie przez odwrotność prawdopodobieństwa odpowiedzi
+### 7. Ważenie przez odwrotność prawdopodobieństwa odpowiedzi
 
 + PSW
   + R: `stats`, `glmnet`
@@ -91,7 +96,7 @@
   + Dane na zajęcia [gospodarstwa-zajecia.xlsx](data/gospodarstwa-zajecia.xlsx)
   
 
-### 7. Estymacja wariancji
+### 8. Estymacja wariancji
 
 + R: `boot`
 + Python: TBA

@@ -1,0 +1,114 @@
+---
+title: "Case Study 2025"
+format: html
+---
+
+1. Proszę wczytać zbiór danych `gospodarstwa-zajecia.xlsx` [2 min]
+
+2. Proszę sprawdzić rozkłady zmiennych `los`, `dochg` i `wydg`. Co możemy o nich powiedzieć? [8 min]
+   - Sprawdźcie: typ rozkładu, asymetrię, wartości odstające
+   - Proszę obliczyć podstawowe statystyki (średnia, mediana, odch. std.)
+   - Jaki % obserwacji jest brakujących?
+
+3. Które zmienne i jak korelują z `los`, `dochg` i `wydg`? [15 min]
+   Proszę przejrzeć zmienne dostępne w zbiorze danych i zastanowić się, 
+   które zmienne warto rozważyć jako pomocnicze.
+   
+   Sugerowane analizy:
+   - Korelacje dla zmiennych numerycznych
+   - Boxploty dla zmiennych kategorycznych
+   - Dla wybranych zmiennych: porównanie rozkładów lub wstępna regresja
+   
+   Cel: zidentyfikować 3-5 najważniejszych zmiennych dla każdej zmiennej.
+   
+4. Jakie modele można rozważyć dla tych 3 zmiennych? [5 min]
+   Dyskusja - proszę uwzględnić:
+   - Typ zmiennej (ciągła, dyskretna, ograniczona?)
+   - Rozkład (normalny, skośny, z wartościami skrajnymi?)
+   - Możliwe modele (regresja liniowa, log-liniowa, inne?)
+   
+5. Proszę zaimputować brakujące dane w zmiennych `los`, `dochg` i `wydg` [40 min]
+   
+   Metody do zastosowania:
+   a) Regresyjna deterministyczna
+   b) Regresyjna stochastyczna
+   c) k-NN z k=5 sąsiadów
+   d) Predictive Mean Matching (PMM)
+   
+   Wskazówki:
+   - Można użyć pakietu `mice` w R lub `sklearn` w Pythonie
+   - Proszę używać tych samych zmiennych pomocniczych dla wszystkich metod (dla porównywalności)
+   - Dla metod stochastycznych: ustalić seed dla powtarzalności
+
+6. Dla wybranej metody proszę ocenić z wykorzystaniem wizualizacji danych jak wyglądają dane zaimputowane w porównaniu z tymi, które obserwujemy. Czy imputacja zachowuje rozkład? [5 min]
+
+7. Dla każdej zmiennej i każdej metody imputacji proszę oszacować 
+   i zaraportować [10 min]:
+   - Średnią z pełnego zbioru (po imputacji)
+   - Średnią tylko z wartości oryginalnych (przed imputacją)
+   - Średnią tylko z wartości zaimputowanych
+   
+   Proszę przedstawić wyniki w formie tabeli.
+
+8. Porównanie i wnioski [5 min]:
+   - Która metoda wydaje się najbardziej odpowiednia dla każdej zmiennej i dlaczego?
+   - Czy któraś metoda systematycznie zawyża/zaniża wartości?
+   - Jakie są implikacje dla dalszych analiz?
+
+::: panel-tabset
+## R
+
+
+Kod na wczytanie pakietu do wczytania danych
+
+```{r}
+## tu będzie kod
+```
+
+Kod na wizualizacje i ocenę danych
+
+```{r}
+## tu będzie kod
+```
+
+
+Kod na imputację danych
+
+```{r}
+## tu będzie kod
+```
+
+Kod na podsumowanie danych
+
+```{r}
+## tu będzie kod
+```
+
+## Python
+
+Kod na wczytanie pakietu do wczytania danych
+
+```{python}
+## tu będzie kod
+```
+
+Kod na wizualizacje i ocenę danych
+
+```{python}
+## tu będzie kod
+```
+
+Kod na imputację danych
+
+```{python}
+## tu będzie kod
+```
+
+Kod na podsumowanie danych
+
+```{python}
+## tu będzie kod
+```
+
+:::
+
