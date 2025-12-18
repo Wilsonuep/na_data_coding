@@ -1,6 +1,12 @@
 ---
 title: "Case Study 2025"
-format: html
+format: 
+  html:
+    self-contained: true
+    number-sections: true
+    toc: true
+    toc-title: "Spis treści"
+editor: source
 ---
 
 1. Proszę wczytać zbiór danych `gospodarstwa-zajecia.xlsx` [2 min]
@@ -62,26 +68,115 @@ format: html
 Kod na wczytanie pakietu do wczytania danych
 
 ```{r}
-## tu będzie kod
+library(readxl)
+library(simputation)
+library(VIM)
+library(data.table)
+library(ggplot2)
+library(patchwork)
+```
+
+```{r}
+gosp <- read_excel("../data/gospodarstwa-zajecia.xlsx") |> setDT()
+head(gosp)
 ```
 
 Kod na wizualizacje i ocenę danych
 
 ```{r}
-## tu będzie kod
+hist(gosp$wydg)
+hist(gosp$wydg, breaks = "fd")
+hist(gosp$dochg, breaks = "fd")
+plot(gosp$dochg, gosp$wydg)
+table(gosp$los)
+table(gosp$dochg<0)
+summary(gosp$los)
+boxplot(wydg ~ round(los), gosp)
+summary(aggr(gosp[, c("los", "wydg", "dochg")]))
+```
+
+```{r}
+gosp[, names(gosp)[1:13] := lapply(.SD, as.factor), .SDcols = names(gosp)[1:13]]
+gosp[, los:= floor(los)]
+table(gosp$d38, gosp$los)
+boxplot(log(wydg) ~ klm, data=gosp)
+summary(lm(log(los) ~ trb + zut, data=gosp))
+summary(lm(log(dochg+22000) ~ trb + zut, data=gosp))
+car::Anova(lm(log(wydg) ~ d61 + klm + woj + trb + zut, data=gosp))
 ```
 
 
 Kod na imputację danych
 
 ```{r}
-## tu będzie kod
+set.seed(2025)
+gosp$flag <- is.na(gosp$los)
+gosp_naraz_pmm <- gosp |>
+  impute_pmm(los + wydg + dochg ~ zut + trb + d61 + d63 + klm)
+
+gosp_naraz_knn <- gosp |>
+  impute_knn(los + wydg + dochg ~ zut + trb + d61 + d63 + klm)
+
+gosp_naraz_regd <- gosp |>
+  impute_lm(los + wydg + dochg ~ zut + trb + d61 + d63 + klm)
+
+gosp_naraz_regs <- gosp |>
+  impute_lm(los + wydg + dochg ~ zut + trb + d61 + d63 + klm, add_residual = "observed")
+
+
+gosp_pokolei_pmm <- gosp |>
+  impute_pmm(los ~ zut + trb + d61 + d63 + klm) |>
+  impute_pmm(dochg ~ los + zut + trb + d61 + d63 + klm) |>
+  impute_pmm(wydg ~ dochg + los + zut + trb + d61 + d63 + klm)
+
+gosp_pokolei_knn <- gosp |>
+  impute_knn(los ~ zut + trb + d61 + d63 + klm) |>
+  impute_knn(dochg ~ los + zut + trb + d61 + d63 + klm) |>
+  impute_knn(wydg ~ dochg + los + zut + trb + d61 + d63 + klm)
+
+gosp_pokolei_regd <- gosp |>
+  impute_lm(los ~ zut + trb + d61 + d63 + klm) |>
+  impute_lm(dochg ~ los + zut + trb + d61 + d63 + klm) |>
+  impute_lm(wydg ~ dochg + los + zut + trb + d61 + d63 + klm)
+
+gosp_pokolei_regs <- gosp |>
+  impute_lm(los ~ zut + trb + d61 + d63 + klm, add_residual = "observed") |>
+  impute_lm(dochg ~ los + zut + trb + d61 + d63 + klm, add_residual = "observed") |>
+  impute_lm(wydg ~ dochg + los + zut + trb + d61 + d63 + klm, add_residual = "observed")
+
 ```
 
 Kod na podsumowanie danych
 
 ```{r}
-## tu będzie kod
+tab_wyniki <- rbind(
+  colMeans(gosp_naraz_pmm[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_naraz_knn[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_naraz_regd[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_naraz_regs[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_pokolei_pmm[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_pokolei_knn[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_pokolei_regd[, c("los", "dochg", "wydg")]),
+  colMeans(gosp_pokolei_regs[, c("los", "dochg", "wydg")])
+)
+tab_wyniki <- as.data.frame(tab_wyniki)
+tab_wyniki$jak <- rep(c("naraz", "pokolei"), each  = 4)
+tab_wyniki$metoda <- rep(c("pmm", "knn", "regd", "regs"), times = 2)
+tab_wyniki
+mean(gosp$los,na.rm=T)
+```
+
+```{r}
+p1 <- ggplot(data=gosp_naraz_knn, aes(x = log(wydg), fill = flag)) +
+  geom_density(alpha = 0.5) + labs(title = "knn")
+p2 <- ggplot(data=gosp_naraz_pmm, aes(x = log(wydg), fill = flag)) +
+  geom_density(alpha = 0.5) + labs(title = "pmm")
+p3 <- ggplot(data=gosp_naraz_regd, aes(x = log(wydg), fill = flag)) +
+  geom_density(alpha = 0.5) + labs(title = "reg-determ")
+p4 <- ggplot(data=gosp_naraz_regs, aes(x = log(wydg), fill = flag)) +
+  geom_density(alpha = 0.5) + labs(title = "reg-stoch")
+
+(p1 + p2) / (p3 + p4)
 ```
 
 ## Python
@@ -89,25 +184,16 @@ Kod na podsumowanie danych
 Kod na wczytanie pakietu do wczytania danych
 
 ```{python}
-## tu będzie kod
-```
-
-Kod na wizualizacje i ocenę danych
-
-```{python}
-## tu będzie kod
-```
-
-Kod na imputację danych
-
-```{python}
-## tu będzie kod
-```
-
-Kod na podsumowanie danych
-
-```{python}
-## tu będzie kod
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.impute import KNNImputer
+from sklearn.linear_model import LinearRegression
+from scipy import stats
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from statsmodels.stats.anova import anova_lm
 ```
 
 :::
