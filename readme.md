@@ -77,13 +77,13 @@
 + Wstęp do kalibracji
   + R: `survey`, `sampling`, `laeken`
   + Python: [`samplics`](https://samplics-org.github.io/samplics/pages/weight_adj.html)
-  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2025/refs/heads/main/codes/7-kalibracja-wstep.html)
+  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/9-kalibracja-wstep.html)
   + Dane na zajęcia [data5-kalibracja.csv](data/data5-kalibracja.csv)
 
 + Kalibracja (bardziej zaawansowana)
   + R: `survey`
   + Python: [`samplics`](https://samplics-org.github.io/samplics/pages/weight_adj.html)
-  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2025/refs/heads/main/codes/8-kalibracja-case-study.html)
+  + [Notatnik](https://htmlpreview.github.io/?https://raw.githubusercontent.com/DepartmentOfStatisticsPUE/adn-2026/refs/heads/main/codes/10-kalibracja-case-study.html)
   + Dane na zajęcia [gospodarstwa-zajecia.xlsx](data/gospodarstwa-zajecia.xlsx)
   
 
