@@ -155,11 +155,11 @@ pop_woj = gosp['woj'].value_counts().to_dict()
 pop_klm_woj = gosp.groupby(['klm', 'woj']).size().to_dict()
 ```
 
-```{r}
+```{python}
 gosp_resp['weight'] = 1.0
 ```
 
-```{r}
+```{python}
 print(f"\nPoczątkowe wagi: {gosp_resp['weight'].unique()}")
 ```
 
