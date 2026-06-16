@@ -16,8 +16,8 @@ editor: source
 
 ```{r, message = FALSE, warning=FALSE}
 library(mice)
-#library(rMIDAS)
-#set_python_env(x = "/opt/homebrew/bin/python3.10")
+library(rMIDAS)
+set_python_env(x = "/opt/homebrew/bin/python3.10")
 ```
 
 ## Python
